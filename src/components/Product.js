@@ -55,7 +55,7 @@ function Product({id, title, price, description, category, image}) {
 <div className="mb-5">
 <Currency
   quantity={price}
-  currency="USD"
+  currency="INR"
 />
 </div>
 

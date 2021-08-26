@@ -1,4 +1,3 @@
-  
 import Header from '../components/Header';
 import CheckoutProduct from '../components/CheckoutProduct';
 import Image from 'next/image';
@@ -7,17 +6,17 @@ import { selectItems, selectTotal } from '../slices/basketSlice';
 import Currency from 'react-currency-formatter';
 import { useSession } from 'next-auth/client';
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios'
+import axios from 'axios';
 const stripePromise = loadStripe(`${process.env.stripe_public_key}`)
  
 
 function Checkout() {
-    const items = useSelector(selectItems)
+    const items = useSelector(selectItems);
     const total = useSelector(selectTotal);
     const [session] = useSession() 
 
     const createCheckoutSession = async (req, res)=>{
-      const stripe = await stripePromise;
+      const stripe = await stripePromise
 
     //   call the backend to create checkout session
 
@@ -25,13 +24,13 @@ function Checkout() {
     {
        items: items,
        email: session.user.email
-    });
+    })
 
     // Redirect user/costumer to stripe Checkout
 
     const result = await stripe.redirectToCheckout({
         sessionId: checkoutSession.data.id
-    });
+    })
     if(result.error) alert(result.error.message)
         
     
